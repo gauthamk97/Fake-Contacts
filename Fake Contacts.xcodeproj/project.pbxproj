@@ -1,0 +1,333 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC010FF51D23A4CE00046A71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC010FF31D23A4CE00046A71 /* Main.storyboard */; };
+		AC010FF71D23CFD800046A71 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC010FF61D23CFD800046A71 /* ContactsTableViewController.swift */; };
+		AC010FF91D23DBAB00046A71 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC010FF81D23DBAB00046A71 /* InformationViewController.swift */; };
+		AC18E0B61D2A639B0035F400 /* AddorEditContact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC18E0B51D2A639B0035F400 /* AddorEditContact.storyboard */; };
+		AC18E0B81D2A63C90035F400 /* AddorEditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18E0B71D2A63C90035F400 /* AddorEditContactViewController.swift */; };
+		AC279AA11D228B150036BD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC279AA01D228B150036BD05 /* AppDelegate.swift */; };
+		AC279AA91D228B150036BD05 /* Fake_Contacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC279AA71D228B150036BD05 /* Fake_Contacts.xcdatamodeld */; };
+		AC279AAB1D228B150036BD05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC279AAA1D228B150036BD05 /* Assets.xcassets */; };
+		AC279AAE1D228B150036BD05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC279AAC1D228B150036BD05 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AC010FF41D23A4CE00046A71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Fake Contacts/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		AC010FF61D23CFD800046A71 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		AC010FF81D23DBAB00046A71 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		AC18E0B51D2A639B0035F400 /* AddorEditContact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddorEditContact.storyboard; sourceTree = "<group>"; };
+		AC18E0B71D2A63C90035F400 /* AddorEditContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddorEditContactViewController.swift; sourceTree = "<group>"; };
+		AC279A9D1D228B150036BD05 /* Fake Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fake Contacts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC279AA01D228B150036BD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC279AA81D228B150036BD05 /* Fake_Contacts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fake_Contacts.xcdatamodel; sourceTree = "<group>"; };
+		AC279AAA1D228B150036BD05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC279AAD1D228B150036BD05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AC279AAF1D228B150036BD05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC279A9A1D228B140036BD05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC010FEC1D23995100046A71 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		AC279A941D228B140036BD05 = {
+			isa = PBXGroup;
+			children = (
+				AC010FEC1D23995100046A71 /* Resources */,
+				AC279A9F1D228B150036BD05 /* Fake Contacts */,
+				AC279A9E1D228B150036BD05 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC279A9E1D228B150036BD05 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC279A9D1D228B150036BD05 /* Fake Contacts.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC279A9F1D228B150036BD05 /* Fake Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				AC279AAA1D228B150036BD05 /* Assets.xcassets */,
+				AC279AA01D228B150036BD05 /* AppDelegate.swift */,
+				AC010FF81D23DBAB00046A71 /* InformationViewController.swift */,
+				AC010FF61D23CFD800046A71 /* ContactsTableViewController.swift */,
+				AC010FF31D23A4CE00046A71 /* Main.storyboard */,
+				AC18E0B71D2A63C90035F400 /* AddorEditContactViewController.swift */,
+				AC18E0B51D2A639B0035F400 /* AddorEditContact.storyboard */,
+				AC279AAC1D228B150036BD05 /* LaunchScreen.storyboard */,
+				AC279AAF1D228B150036BD05 /* Info.plist */,
+				AC279AA71D228B150036BD05 /* Fake_Contacts.xcdatamodeld */,
+			);
+			path = "Fake Contacts";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC279A9C1D228B140036BD05 /* Fake Contacts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC279AB21D228B150036BD05 /* Build configuration list for PBXNativeTarget "Fake Contacts" */;
+			buildPhases = (
+				AC279A991D228B140036BD05 /* Sources */,
+				AC279A9A1D228B140036BD05 /* Frameworks */,
+				AC279A9B1D228B140036BD05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fake Contacts";
+			productName = "Fake Contacts";
+			productReference = AC279A9D1D228B150036BD05 /* Fake Contacts.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC279A951D228B140036BD05 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Gautham Kumar";
+				TargetAttributes = {
+					AC279A9C1D228B140036BD05 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = VPM5RWXN8D;
+					};
+				};
+			};
+			buildConfigurationList = AC279A981D228B140036BD05 /* Build configuration list for PBXProject "Fake Contacts" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC279A941D228B140036BD05;
+			productRefGroup = AC279A9E1D228B150036BD05 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC279A9C1D228B140036BD05 /* Fake Contacts */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC279A9B1D228B140036BD05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC010FF51D23A4CE00046A71 /* Main.storyboard in Resources */,
+				AC279AAE1D228B150036BD05 /* LaunchScreen.storyboard in Resources */,
+				AC18E0B61D2A639B0035F400 /* AddorEditContact.storyboard in Resources */,
+				AC279AAB1D228B150036BD05 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC279A991D228B140036BD05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC18E0B81D2A63C90035F400 /* AddorEditContactViewController.swift in Sources */,
+				AC279AA91D228B150036BD05 /* Fake_Contacts.xcdatamodeld in Sources */,
+				AC279AA11D228B150036BD05 /* AppDelegate.swift in Sources */,
+				AC010FF71D23CFD800046A71 /* ContactsTableViewController.swift in Sources */,
+				AC010FF91D23DBAB00046A71 /* InformationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AC010FF31D23A4CE00046A71 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC010FF41D23A4CE00046A71 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AC279AAC1D228B150036BD05 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC279AAD1D228B150036BD05 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AC279AB01D228B150036BD05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC279AB11D228B150036BD05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC279AB31D228B150036BD05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Fake Contacts/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GK.Fake-Contacts";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AC279AB41D228B150036BD05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Fake Contacts/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.GK.Fake-Contacts";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC279A981D228B140036BD05 /* Build configuration list for PBXProject "Fake Contacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC279AB01D228B150036BD05 /* Debug */,
+				AC279AB11D228B150036BD05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC279AB21D228B150036BD05 /* Build configuration list for PBXNativeTarget "Fake Contacts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC279AB31D228B150036BD05 /* Debug */,
+				AC279AB41D228B150036BD05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AC279AA71D228B150036BD05 /* Fake_Contacts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AC279AA81D228B150036BD05 /* Fake_Contacts.xcdatamodel */,
+			);
+			currentVersion = AC279AA81D228B150036BD05 /* Fake_Contacts.xcdatamodel */;
+			path = Fake_Contacts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = AC279A951D228B140036BD05 /* Project object */;
+}
