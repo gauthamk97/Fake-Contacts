@@ -12,6 +12,9 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var NameText: UITextField!
     @IBOutlet weak var NumberText: UITextField!
+    @IBOutlet var contactImage: UIView!
+    
+    var justHitReturn: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +24,37 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         NameText.returnKeyType = .Next
         NumberText.keyboardType = .NumberPad
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         // Do any additional setup after loading the view.
     }
+    
+    func keyboardWillShow(notif : NSNotification) {
+        if justHitReturn {
+            self.view.window?.frame.origin.y -= 90
+        }
+        else if NameText.editing {
+            self.view.window?.frame.origin.y -= 70
+        }
+        else if NumberText.editing {
+            self.view.window?.frame.origin.y -= 160
+        }
+        print("Showing")
+    }
 
+    func keyboardWillHide(notif : NSNotification) {
+        self.view.window?.frame.origin.y = 0
+        print("Hiding")
+        justHitReturn = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        justHitReturn = true
         if textField == NameText {
             NumberText.becomeFirstResponder()
         }
@@ -68,6 +89,8 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         self.NumberText.resignFirstResponder()
     }
     
+    @IBAction func OnClickSave(sender: AnyObject) {
+    }
     
     
     @IBAction func OnCancelClick(sender: AnyObject) {
