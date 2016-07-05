@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-let haveToUpdateTableView = ".com.GK.updateTVRequired"
-
 class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var NameText: UITextField!
@@ -28,9 +26,21 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         NameText.returnKeyType = .Next
         NumberText.keyboardType = .NumberPad
 
+        if calledFromEdit {
+            //Obtaining info on which person's name you clicked
+            let person = contactPeople[currentSelectedContact.row]
+            
+            //Setting the details
+            self.NameText.text = person.valueForKey("name") as? String
+            self.NumberText.text = person.valueForKey("number") as? String
+        }
         //Watching out for when keyboard pops up and when it hides - to adjust the screen
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     //Called when keyboard pops up
@@ -101,34 +111,48 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     //Functionality to Save Contact
     @IBAction func OnClickSave(sender: AnyObject) {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
-        
-        let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        if NameText.text == "" || NumberText.text == "" {
-            print("Save failed")
-            dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        else {
+        if calledFromEdit {
+            let person = contactPeople[currentSelectedContact.row]
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
-            
-            do {
-                try managedContext.save()
-                contactPeople.append(person)
-            }
-            catch let error as NSError {
-                print("We have an error : \(error)")
-            }
+            contactPeople[currentSelectedContact.row] = person
             
             NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
             
             dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        else {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = appDelegate.managedObjectContext
+            
+            let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
+            
+            let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
+            if NameText.text == "" || NumberText.text == "" {
+                print("Save failed")
+                dismissViewControllerAnimated(true, completion: nil)
+            }
+                
+            else {
+                person.setValue(NameText.text!, forKey: "name")
+                person.setValue(NumberText.text!, forKey: "number")
+                
+                do {
+                    try managedContext.save()
+                    contactPeople.append(person)
+                }
+                catch let error as NSError {
+                    print("We have an error : \(error)")
+                }
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
+                
+                dismissViewControllerAnimated(true, completion: nil)
+                
+            }
 
         }
         

@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-var contactPeople: [NSManagedObject] = []
-
-var currentSelectedContact: NSIndexPath!
-
 class ContactsTableViewController: UITableViewController {
     
     @IBOutlet var contactsTable: UITableView!
@@ -30,6 +26,10 @@ class ContactsTableViewController: UITableViewController {
 
         // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     //To fetch existing data

@@ -37,7 +37,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dd-7K-DDG" userLabel="NameLabel">
                                 <rect key="frame" x="180" y="318" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GcI-iX-6zh" userLabel="NameText">
@@ -85,7 +85,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="113-qB-KQY" userLabel="NumberLabel">
                                 <rect key="frame" x="180" y="408" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-eu-zeC">
@@ -151,12 +151,12 @@
                                 <exclude reference="fjQ-6d-HQ3"/>
                                 <exclude reference="WvJ-08-Ame"/>
                                 <exclude reference="fqj-Ov-lrC"/>
-                                <exclude reference="fGP-Ci-n2i"/>
-                                <exclude reference="mnq-3h-lrr"/>
                                 <exclude reference="PD4-HD-j0Q"/>
                                 <exclude reference="Q64-bV-45N"/>
                                 <exclude reference="SX2-zB-v0w"/>
                                 <exclude reference="UTu-Ih-T9U"/>
+                                <exclude reference="fGP-Ci-n2i"/>
+                                <exclude reference="mnq-3h-lrr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -175,12 +175,12 @@
                                 <include reference="fjQ-6d-HQ3"/>
                                 <include reference="WvJ-08-Ame"/>
                                 <include reference="fqj-Ov-lrC"/>
-                                <include reference="fGP-Ci-n2i"/>
-                                <include reference="mnq-3h-lrr"/>
                                 <include reference="PD4-HD-j0Q"/>
                                 <include reference="Q64-bV-45N"/>
                                 <include reference="SX2-zB-v0w"/>
                                 <include reference="UTu-Ih-T9U"/>
+                                <include reference="fGP-Ci-n2i"/>
+                                <include reference="mnq-3h-lrr"/>
                             </mask>
                         </variation>
                     </view>

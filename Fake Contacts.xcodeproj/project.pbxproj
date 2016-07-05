@@ -16,6 +16,7 @@
 		AC279AA91D228B150036BD05 /* Fake_Contacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC279AA71D228B150036BD05 /* Fake_Contacts.xcdatamodeld */; };
 		AC279AAB1D228B150036BD05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC279AAA1D228B150036BD05 /* Assets.xcassets */; };
 		AC279AAE1D228B150036BD05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC279AAC1D228B150036BD05 /* LaunchScreen.storyboard */; };
+		ACC0BC551D2BD21100BADB6A /* UniversalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC0BC541D2BD21100BADB6A /* UniversalVariables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AC279AAA1D228B150036BD05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC279AAD1D228B150036BD05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC279AAF1D228B150036BD05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC0BC541D2BD21100BADB6A /* UniversalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalVariables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				AC279AAA1D228B150036BD05 /* Assets.xcassets */,
+				ACC0BC541D2BD21100BADB6A /* UniversalVariables.swift */,
 				AC279AA01D228B150036BD05 /* AppDelegate.swift */,
 				AC010FF31D23A4CE00046A71 /* Main.storyboard */,
 				AC010FF81D23DBAB00046A71 /* InformationViewController.swift */,
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC18E0B81D2A63C90035F400 /* AddorEditContactViewController.swift in Sources */,
+				ACC0BC551D2BD21100BADB6A /* UniversalVariables.swift in Sources */,
 				AC279AA91D228B150036BD05 /* Fake_Contacts.xcdatamodeld in Sources */,
 				AC279AA11D228B150036BD05 /* AppDelegate.swift in Sources */,
 				AC010FF71D23CFD800046A71 /* ContactsTableViewController.swift in Sources */,

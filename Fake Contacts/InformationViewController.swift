@@ -24,6 +24,10 @@ class InformationViewController: UIViewController {
         self.nameLabel?.text = person.valueForKey("name") as? String
         self.numberLabel?.text = person.valueForKey("number") as? String
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: #selector(InformationViewController.onClickEdit))
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InformationViewController.updateContactDetails), name: haveToUpdateTableView, object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +35,29 @@ class InformationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func updateContactDetails() {
+        //Obtaining info on which person's name you clicked
+        let person = contactPeople[currentSelectedContact.row]
+        
+        //Setting the details
+        self.nameLabel?.text = person.valueForKey("name") as? String
+        self.numberLabel?.text = person.valueForKey("number") as? String
+    }
+    
+    func onClickEdit() {
+        
+        print("Edit called")
+        calledFromEdit = true
+        let storyboard = UIStoryboard(name: "AddorEditContact", bundle: nil)
+        
+        let controller = storyboard.instantiateViewControllerWithIdentifier("ContactEditController")
+        
+        presentViewController(controller, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
