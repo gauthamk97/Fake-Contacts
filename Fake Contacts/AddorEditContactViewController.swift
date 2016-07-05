@@ -45,15 +45,24 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     
     //Called when keyboard pops up
     func keyboardWillShow(notif : NSNotification) {
-        if justHitReturn {
-            self.view.window?.frame.origin.y -= 90
-        }
-        else if NameText.editing {
-            self.view.window?.frame.origin.y -= 70
+        
+        let userInfo:NSDictionary = notif.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        let keyboardHeight = keyboardRectangle.height
+        
+        var amountToMove: CGFloat!
+        
+        if NameText.editing {
+            amountToMove = CGRectGetMaxY(self.NameText.frame) + keyboardHeight - view.frame.height
         }
         else if NumberText.editing {
-            self.view.window?.frame.origin.y -= 160
+            amountToMove = CGRectGetMaxY(self.NumberText.frame) + keyboardHeight - view.frame.height
         }
+        if amountToMove > -6 {
+            self.view.window?.frame.origin.y = -amountToMove-6
+        }
+        
         print("Showing")
     }
 
@@ -111,6 +120,12 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     //Functionality to Save Contact
     @IBAction func OnClickSave(sender: AnyObject) {
         
+        if NameText.text == "" || NumberText.text == "" {
+            print("Save failed")
+            dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+
         if calledFromEdit {
             let person = contactPeople[currentSelectedContact.row]
             person.setValue(NameText.text!, forKey: "name")
@@ -118,6 +133,8 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
             contactPeople[currentSelectedContact.row] = person
             
             NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
+            
+            calledFromEdit = false
             
             dismissViewControllerAnimated(true, completion: nil)
         }
@@ -130,30 +147,22 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
             let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
             
             let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+            person.setValue(NameText.text!, forKey: "name")
+            person.setValue(NumberText.text!, forKey: "number")
+                
+            do {
+                try managedContext.save()
+                contactPeople.append(person)
+            }
+            catch let error as NSError {
+                print("We have an error : \(error)")
+            }
             
-            if NameText.text == "" || NumberText.text == "" {
-                print("Save failed")
-                dismissViewControllerAnimated(true, completion: nil)
-            }
-                
-            else {
-                person.setValue(NameText.text!, forKey: "name")
-                person.setValue(NumberText.text!, forKey: "number")
-                
-                do {
-                    try managedContext.save()
-                    contactPeople.append(person)
-                }
-                catch let error as NSError {
-                    print("We have an error : \(error)")
-                }
-                
-                NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
-                
-                dismissViewControllerAnimated(true, completion: nil)
-                
-            }
-
+            NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
+            
+            dismissViewControllerAnimated(true, completion: nil)
+            
         }
         
     }
