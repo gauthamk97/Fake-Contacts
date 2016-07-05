@@ -12,9 +12,6 @@ import CoreData
 class ContactsTableViewController: UITableViewController {
 
     var contactNames: [String]!
-    var alphabetizedContactNames: [String : [String]]!
-    
-    @IBOutlet var tableview: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +20,6 @@ class ContactsTableViewController: UITableViewController {
         
         contactNames = ["Amrita","Ajay","Asad","Chetna","Dad","Deepak","Dhanush","Dipti","Divya","Manish","Karthik","Lavanya","Nikhil","Nikita","Nishanth","Shashanth","Shriya","Tanya","Vishnu"]
         
-        alphabetizedContactNames = alphabetize(contactNames)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,45 +37,22 @@ class ContactsTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        
-        let arrayOfKeys = alphabetizedContactNames.keys
-        let sortedKeys = arrayOfKeys.sort()
-        return sortedKeys.count
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let arrayOfKeys = alphabetizedContactNames.keys
-        let sortedKeys = arrayOfKeys.sort()
-        
-        let key = sortedKeys[section]
-        
-        return (alphabetizedContactNames[key]?.count)!
+        return contactNames.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let arrayOfKeys = alphabetizedContactNames.keys
-        let sortedKeys = arrayOfKeys.sort()
-        
-        let key = sortedKeys[indexPath.section]
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        if let contacts = alphabetizedContactNames[key] {
-             cell.textLabel?.text = contacts[indexPath.row]
-        }
+        cell.textLabel?.text = contactNames[indexPath.row]
         
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let arrayOfKeys = alphabetizedContactNames.keys
-        let sortedKeys = arrayOfKeys.sort()
-        
-        let key = sortedKeys[section]
-        
-        return key
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -95,28 +68,6 @@ class ContactsTableViewController: UITableViewController {
         
         presentViewController(controller, animated: true, completion: nil)
         
-    }
-    private func alphabetize(array : [String]) -> [String : [String]] {
-        var result: [String : [String]] = [:]
-        
-        for item in array {
-            
-            let index = item.startIndex.advancedBy(1)
-            let firstLetter = item.substringToIndex(index)
-            
-            if result[firstLetter] == nil {
-                result[firstLetter] = [item]
-            }
-            else {
-                result[firstLetter]?.append(item)
-            }
-        }
-        
-        for (key,value) in result {
-            result[key] = value.sort()
-        }
-        
-        return result
     }
 
     /*

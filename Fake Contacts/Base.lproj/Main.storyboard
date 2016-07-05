@@ -36,7 +36,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableview" destination="Nap-49-gpD" id="4b5-OB-VNa"/>
                         <segue destination="oiZ-RP-6nP" kind="show" identifier="InformationController" id="C33-v5-SYm"/>
                     </connections>
                 </tableViewController>
