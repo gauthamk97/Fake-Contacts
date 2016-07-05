@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 
-class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
+class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var NameText: UITextField!
     @IBOutlet weak var NumberText: UITextField!
-    @IBOutlet var contactImage: UIView!
+    @IBOutlet weak var contactImage: UIImageView!
+    @IBOutlet weak var editPicture: UIButton!
     
     var justHitReturn: Bool = false
     
@@ -33,6 +34,11 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
             //Setting the details
             self.NameText.text = person.valueForKey("name") as? String
             self.NumberText.text = person.valueForKey("number") as? String
+            if let imageData = person.valueForKey("picture") as? NSData {
+                self.contactImage.image = UIImage(data: imageData, scale: 1.0)
+                self.contactImage.alpha = 0.5
+                self.editPicture.setTitle("Edit Picture", forState: .Normal)
+            }
         }
         //Watching out for when keyboard pops up and when it hides - to adjust the screen
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
@@ -121,8 +127,13 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     @IBAction func OnClickSave(sender: AnyObject) {
         
         if NameText.text == "" || NumberText.text == "" {
-            print("Save failed")
-            dismissViewControllerAnimated(true, completion: nil)
+            
+            let alertController = UIAlertController(title: "Alert", message: "Fill in all details", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             return
         }
 
@@ -130,6 +141,11 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
             let person = contactPeople[currentSelectedContact.row]
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
+            if (contactImage.image != nil) {
+                let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
+                person.setValue(imageData, forKey: "picture")
+            }
+            
             contactPeople[currentSelectedContact.row] = person
             
             NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
@@ -150,6 +166,8 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
+            let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
+            person.setValue(imageData, forKey: "picture")
                 
             do {
                 try managedContext.save()
@@ -170,8 +188,23 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     //If cancel is clicked
     @IBAction func OnCancelClick(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+        calledFromEdit = false
     }
 
+    @IBAction func EditPictureClick(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .PhotoLibrary
+            imagePicker.allowsEditing = true
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        contactImage.image = image
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--AddorEditContact View Controller-->
@@ -88,29 +89,39 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-eu-zeC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="add_user" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-eu-zeC">
                                 <rect key="frame" x="180" y="121" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.71372549019607845" green="0.71372549019607845" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="217" id="fqC-3m-Iw1"/>
-                                    <constraint firstAttribute="width" constant="166" id="rgI-CU-I9G"/>
+                                    <constraint firstAttribute="width" secondItem="c6G-eu-zeC" secondAttribute="height" multiplier="1:1" id="Mbm-F2-oqP"/>
+                                    <constraint firstAttribute="width" constant="166" id="rgI-CU-I9G">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="220"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="fqC-3m-Iw1"/>
+                                        <exclude reference="Mbm-F2-oqP"/>
                                         <exclude reference="rgI-CU-I9G"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="fqC-3m-Iw1"/>
+                                        <include reference="Mbm-F2-oqP"/>
                                         <include reference="rgI-CU-I9G"/>
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9U-Nq-py8" userLabel="EditPicture">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <connections>
+                                    <action selector="EditPictureClick:" destination="3Q3-PQ-Wa8" eventType="touchUpInside" id="z5m-Yv-QAd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="N9U-Nq-py8" firstAttribute="height" secondItem="c6G-eu-zeC" secondAttribute="height" id="0Kp-Ie-XBI"/>
                             <constraint firstItem="c6G-eu-zeC" firstAttribute="centerX" secondItem="XZI-AU-t8V" secondAttribute="centerX" id="3e3-mB-5ex"/>
                             <constraint firstItem="113-qB-KQY" firstAttribute="top" secondItem="c6G-eu-zeC" secondAttribute="bottom" constant="60" id="PD4-HD-j0Q">
                                 <variation key="heightClass=regular-widthClass=compact" constant="90"/>
@@ -118,6 +129,7 @@
                             <constraint firstItem="113-qB-KQY" firstAttribute="centerX" secondItem="XZI-AU-t8V" secondAttribute="centerX" id="Q64-bV-45N">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-90"/>
                             </constraint>
+                            <constraint firstItem="N9U-Nq-py8" firstAttribute="centerY" secondItem="c6G-eu-zeC" secondAttribute="centerY" id="QFm-WQ-eDp"/>
                             <constraint firstItem="lB5-ut-bqO" firstAttribute="top" secondItem="c6G-eu-zeC" secondAttribute="bottom" constant="60" id="SX2-zB-v0w">
                                 <variation key="heightClass=regular-widthClass=compact" constant="84"/>
                             </constraint>
@@ -128,12 +140,14 @@
                             <constraint firstItem="1Dd-7K-DDG" firstAttribute="centerX" secondItem="XZI-AU-t8V" secondAttribute="centerX" id="WvJ-08-Ame">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-90"/>
                             </constraint>
+                            <constraint firstItem="N9U-Nq-py8" firstAttribute="width" secondItem="c6G-eu-zeC" secondAttribute="width" id="dty-oV-ESD"/>
                             <constraint firstItem="GcI-iX-6zh" firstAttribute="centerX" secondItem="XZI-AU-t8V" secondAttribute="centerX" id="fGP-Ci-n2i">
                                 <variation key="heightClass=regular-widthClass=compact" constant="60"/>
                             </constraint>
                             <constraint firstItem="c6G-eu-zeC" firstAttribute="top" secondItem="iFf-Ui-hak" secondAttribute="bottom" constant="70" id="fjQ-6d-HQ3"/>
                             <constraint firstItem="iFf-Ui-hak" firstAttribute="centerX" secondItem="c6G-eu-zeC" secondAttribute="centerX" id="fo8-FK-Pta"/>
                             <constraint firstItem="1Dd-7K-DDG" firstAttribute="top" secondItem="c6G-eu-zeC" secondAttribute="bottom" constant="30" id="fqj-Ov-lrC"/>
+                            <constraint firstItem="N9U-Nq-py8" firstAttribute="centerX" secondItem="c6G-eu-zeC" secondAttribute="centerX" id="gNs-k9-4Tr"/>
                             <constraint firstItem="iFf-Ui-hak" firstAttribute="top" secondItem="Jsg-FL-91b" secondAttribute="bottom" id="hue-3X-ggU"/>
                             <constraint firstItem="GcI-iX-6zh" firstAttribute="top" secondItem="c6G-eu-zeC" secondAttribute="bottom" constant="30" id="mnq-3h-lrr">
                                 <variation key="heightClass=regular-widthClass=compact" constant="27"/>
@@ -142,8 +156,13 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="iFf-Ui-hak"/>
+                                <exclude reference="N9U-Nq-py8"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="0Kp-Ie-XBI"/>
+                                <exclude reference="QFm-WQ-eDp"/>
+                                <exclude reference="dty-oV-ESD"/>
+                                <exclude reference="gNs-k9-4Tr"/>
                                 <exclude reference="TQN-uh-ISF"/>
                                 <exclude reference="fo8-FK-Pta"/>
                                 <exclude reference="hue-3X-ggU"/>
@@ -166,8 +185,13 @@
                                 <include reference="GcI-iX-6zh"/>
                                 <include reference="lB5-ut-bqO"/>
                                 <include reference="113-qB-KQY"/>
+                                <include reference="N9U-Nq-py8"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="0Kp-Ie-XBI"/>
+                                <include reference="QFm-WQ-eDp"/>
+                                <include reference="dty-oV-ESD"/>
+                                <include reference="gNs-k9-4Tr"/>
                                 <include reference="TQN-uh-ISF"/>
                                 <include reference="fo8-FK-Pta"/>
                                 <include reference="hue-3X-ggU"/>
@@ -187,7 +211,8 @@
                     <connections>
                         <outlet property="NameText" destination="GcI-iX-6zh" id="6IP-L7-pWW"/>
                         <outlet property="NumberText" destination="lB5-ut-bqO" id="c7t-u2-Qod"/>
-                        <outlet property="contactImage" destination="XZI-AU-t8V" id="Xag-8E-yoR"/>
+                        <outlet property="contactImage" destination="c6G-eu-zeC" id="hni-cq-lyz"/>
+                        <outlet property="editPicture" destination="N9U-Nq-py8" id="6ZQ-z0-9Il"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztL-jY-kLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -195,4 +220,7 @@
             <point key="canvasLocation" x="261" y="379.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add_user" width="512" height="512"/>
+    </resources>
 </document>

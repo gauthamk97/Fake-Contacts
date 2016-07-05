@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Contacts Table View Controller-->
@@ -56,21 +57,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fI2-tO-v0H">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="profile_default" translatesAutoresizingMaskIntoConstraints="NO" id="fI2-tO-v0H">
                                 <rect key="frame" x="207" y="49" width="166" height="217"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.71372549019999998" green="0.71372549019999998" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="166" id="NSr-Tz-Ypr"/>
+                                    <constraint firstAttribute="width" secondItem="fI2-tO-v0H" secondAttribute="height" multiplier="1:1" id="JlY-DE-whG"/>
+                                    <constraint firstAttribute="width" constant="166" id="NSr-Tz-Ypr">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="220"/>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="217" id="RPe-JU-dzL"/>
                                     <constraint firstAttribute="width" constant="166" id="aOy-Lm-hfB"/>
-                                    <constraint firstAttribute="height" constant="217" id="ylv-Ib-fbu"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="JlY-DE-whG"/>
                                         <exclude reference="NSr-Tz-Ypr"/>
                                         <exclude reference="RPe-JU-dzL"/>
                                         <exclude reference="aOy-Lm-hfB"/>
-                                        <exclude reference="ylv-Ib-fbu"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
@@ -81,8 +84,8 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
+                                        <include reference="JlY-DE-whG"/>
                                         <include reference="NSr-Tz-Ypr"/>
-                                        <include reference="ylv-Ib-fbu"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -158,6 +161,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="contactImage" destination="fI2-tO-v0H" id="YkZ-9U-WGy"/>
                         <outlet property="nameLabel" destination="uuM-WI-BmH" id="D5Y-rb-Ayf"/>
                         <outlet property="numberLabel" destination="e1C-eU-KWf" id="fQq-gF-HhS"/>
                     </connections>
@@ -185,4 +189,7 @@
             <point key="canvasLocation" x="144" y="242"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile_default" width="1006" height="1006"/>
+    </resources>
 </document>

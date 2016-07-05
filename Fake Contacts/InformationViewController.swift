@@ -13,6 +13,7 @@ class InformationViewController: UIViewController {
 
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var contactImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,10 @@ class InformationViewController: UIViewController {
         //Setting the details
         self.nameLabel?.text = person.valueForKey("name") as? String
         self.numberLabel?.text = person.valueForKey("number") as? String
-        
+        if let imageData = person.valueForKey("picture") as? NSData {
+           self.contactImage.image = UIImage(data: imageData, scale: 1.0)
+        }
+    
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: #selector(InformationViewController.onClickEdit))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InformationViewController.updateContactDetails), name: haveToUpdateTableView, object: nil)
@@ -46,6 +50,9 @@ class InformationViewController: UIViewController {
         //Setting the details
         self.nameLabel?.text = person.valueForKey("name") as? String
         self.numberLabel?.text = person.valueForKey("number") as? String
+        if let imageData = person.valueForKey("picture") as? NSData {
+            self.contactImage.image = UIImage(data: imageData, scale: 1.0)
+        }
     }
     
     func onClickEdit() {
