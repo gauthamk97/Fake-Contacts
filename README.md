@@ -2,6 +2,6 @@
 
 To Do :-
 
-Implement Core Data
-
-Screen Moves up on accessing keyboard
+Screen Moves up on accessing keyboard - proper implementation
+Alphabetizing Contact List
+Foolproofing empty contact adds
