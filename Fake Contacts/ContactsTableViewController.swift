@@ -9,25 +9,49 @@
 import UIKit
 import CoreData
 
-class ContactsTableViewController: UITableViewController {
+var contactPeople: [NSManagedObject] = []
 
-    var contactNames: [String]!
+var currentSelectedContact: NSIndexPath!
+
+class ContactsTableViewController: UITableViewController {
+    
+    @IBOutlet var contactsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Contacts"
         
-        contactNames = ["Amrita","Ajay","Asad","Chetna","Dad","Deepak","Dhanush","Dipti","Divya","Manish","Karthik","Lavanya","Nikhil","Nikita","Nishanth","Shashanth","Shriya","Tanya","Vishnu"]
-        
+        //To check if table must be updated after adding/editing a contact
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactsTableViewController.updateContacts), name: haveToUpdateTableView, object: nil)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    //To fetch existing data
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Person")
+        
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            contactPeople = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,7 +66,7 @@ class ContactsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contactNames.count
+        return contactPeople.count
     }
 
     
@@ -50,16 +74,23 @@ class ContactsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        cell.textLabel?.text = contactNames[indexPath.row]
+        let contactPerson = contactPeople[indexPath.row]
+        
+        cell.textLabel?.text = contactPerson.valueForKey("name") as? String
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        currentSelectedContact = indexPath
+        
+        //Moving to InformationsViewController
         performSegueWithIdentifier("InformationController", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    //Brings up AddorEditContact Storyboard
     @IBAction func OnAddButtonClick(sender: AnyObject) {
         
         let storyboard = UIStoryboard(name: "AddorEditContact", bundle: nil)
@@ -67,7 +98,11 @@ class ContactsTableViewController: UITableViewController {
         let controller = storyboard.instantiateViewControllerWithIdentifier("ContactEditController")
         
         presentViewController(controller, animated: true, completion: nil)
-        
+    }
+    
+    //This function is called by a NSNotification
+    func updateContacts() {
+        contactsTable.reloadData()
     }
 
     /*

@@ -11,10 +11,19 @@ import CoreData
 
 class InformationViewController: UIViewController {
 
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //Obtaining info on which person's name you clicked
+        let person = contactPeople[currentSelectedContact.row]
+        
+        //Setting the details
+        self.nameLabel?.text = person.valueForKey("name") as? String
+        self.numberLabel?.text = person.valueForKey("number") as? String
+        
     }
 
     override func didReceiveMemoryWarning() {

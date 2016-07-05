@@ -36,6 +36,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contactsTable" destination="Nap-49-gpD" id="8fh-Mj-tZM"/>
                         <segue destination="oiZ-RP-6nP" kind="show" identifier="InformationController" id="C33-v5-SYm"/>
                     </connections>
                 </tableViewController>
@@ -147,6 +148,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="uuM-WI-BmH" id="D5Y-rb-Ayf"/>
+                        <outlet property="numberLabel" destination="e1C-eU-KWf" id="fQq-gF-HhS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwG-GY-7d9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

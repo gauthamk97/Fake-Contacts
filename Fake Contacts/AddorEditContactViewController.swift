@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import CoreData
+
+let haveToUpdateTableView = ".com.GK.updateTVRequired"
 
 class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
     
@@ -20,15 +23,17 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.addDoneButtonOnKeyboard()
         
+        //Setting appropriate keyboard types
         NameText.autocapitalizationType = .Words
         NameText.returnKeyType = .Next
         NumberText.keyboardType = .NumberPad
 
+        //Watching out for when keyboard pops up and when it hides - to adjust the screen
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddorEditContactViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
-        // Do any additional setup after loading the view.
     }
     
+    //Called when keyboard pops up
     func keyboardWillShow(notif : NSNotification) {
         if justHitReturn {
             self.view.window?.frame.origin.y -= 90
@@ -42,6 +47,7 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         print("Showing")
     }
 
+    //Called when keyboard hides
     func keyboardWillHide(notif : NSNotification) {
         self.view.window?.frame.origin.y = 0
         print("Hiding")
@@ -53,7 +59,9 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //On clicking Return key
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
         justHitReturn = true
         if textField == NameText {
             NumberText.becomeFirstResponder()
@@ -64,6 +72,7 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    //To add Done Button to NUMPAD
     func addDoneButtonOnKeyboard()
     {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 50))
@@ -89,10 +98,43 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate {
         self.NumberText.resignFirstResponder()
     }
     
+    //Functionality to Save Contact
     @IBAction func OnClickSave(sender: AnyObject) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
+        
+        let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        if NameText.text == "" || NumberText.text == "" {
+            print("Save failed")
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        else {
+            person.setValue(NameText.text!, forKey: "name")
+            person.setValue(NumberText.text!, forKey: "number")
+            
+            do {
+                try managedContext.save()
+                contactPeople.append(person)
+            }
+            catch let error as NSError {
+                print("We have an error : \(error)")
+            }
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
+            
+            dismissViewControllerAnimated(true, completion: nil)
+
+        }
+        
     }
     
-    
+    //If cancel is clicked
     @IBAction func OnCancelClick(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }

@@ -72,11 +72,11 @@
 			children = (
 				AC279AAA1D228B150036BD05 /* Assets.xcassets */,
 				AC279AA01D228B150036BD05 /* AppDelegate.swift */,
+				AC010FF31D23A4CE00046A71 /* Main.storyboard */,
 				AC010FF81D23DBAB00046A71 /* InformationViewController.swift */,
 				AC010FF61D23CFD800046A71 /* ContactsTableViewController.swift */,
-				AC010FF31D23A4CE00046A71 /* Main.storyboard */,
-				AC18E0B71D2A63C90035F400 /* AddorEditContactViewController.swift */,
 				AC18E0B51D2A639B0035F400 /* AddorEditContact.storyboard */,
+				AC18E0B71D2A63C90035F400 /* AddorEditContactViewController.swift */,
 				AC279AAC1D228B150036BD05 /* LaunchScreen.storyboard */,
 				AC279AAF1D228B150036BD05 /* Info.plist */,
 				AC279AA71D228B150036BD05 /* Fake_Contacts.xcdatamodeld */,
