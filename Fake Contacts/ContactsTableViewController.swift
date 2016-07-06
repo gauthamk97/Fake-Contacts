@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ContactsTableViewController: UITableViewController {
+class ContactsTableViewController: UITableViewController, UISearchControllerDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var contactsTable: UITableView!
     
     override func viewDidLoad() {
