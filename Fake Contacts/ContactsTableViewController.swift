@@ -18,6 +18,7 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
         super.viewDidLoad()
         
         title = "Contacts"
+        alphabetizedContactPeople = alphabetize(contactPeople)
         
         //To check if table must be updated after adding/editing a contact
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactsTableViewController.updateContacts), name: haveToUpdateTableView, object: nil)
@@ -62,24 +63,42 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        let arrayOfKeys = alphabetizedContactPeople.keys
+        
+        return arrayOfKeys.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contactPeople.count
+        let arrayOfKeys = alphabetizedContactPeople.keys
+        let sortedKeys = arrayOfKeys.sort()
+        
+        let key = sortedKeys[section]
+        
+        return (alphabetizedContactPeople[key]?.count)!
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let arrayOfKeys = alphabetizedContactPeople.keys
+        let sortedKeys = arrayOfKeys.sort()
+        
+        let key = sortedKeys[indexPath.section]
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        let contactPerson = contactPeople[indexPath.row]
-        
-        cell.textLabel?.text = contactPerson.valueForKey("name") as? String
-        
+        if let contacts = alphabetizedContactPeople[key] {
+            cell.textLabel?.text = contacts[indexPath.row].valueForKey("name") as? String
+        }
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let arrayOfKeys = alphabetizedContactPeople.keys
+        let sortedKeys = arrayOfKeys.sort()
+        
+        return sortedKeys[section]
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -106,6 +125,47 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
         contactsTable.reloadData()
     }
 
+    private func alphabetize(array : [NSManagedObject]) -> [String : [NSManagedObject]] {
+        var result: [String : [NSManagedObject]] = [:]
+        
+        for item in array {
+            
+            let name = item.valueForKey("name") as? String
+            let index = name!.startIndex.advancedBy(1)
+            let firstLetter = name!.substringToIndex(index)
+            
+            if result[firstLetter] == nil {
+                result[firstLetter] = [item]
+            }
+            else {
+                result[firstLetter]?.append(item)
+            }
+        }
+        
+        for (key,value) in result {
+            result[key] = sortNSManagedObjectArray(value)
+        }
+        
+        return result
+    }
+    
+    private func sortNSManagedObjectArray(array : [NSManagedObject]) -> [NSManagedObject] {
+        var result: [NSManagedObject] = array
+        var temp: NSManagedObject
+        for i in 0..<array.count-1 {
+            for j in i..<array.count-i-1 {
+                let name1 = array[j].valueForKey("name")
+                let name2 = array[j+1].valueForKey("name")
+                
+                if name1?.lowercaseString>name2?.lowercaseString {
+                    temp = result[j]
+                    result[j]=result[j+1]
+                    result[j+1]=temp
+                }
+            }
+        }
+        return result
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

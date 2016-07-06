@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 var contactPeople: [NSManagedObject] = []
+var alphabetizedContactPeople: [String : [NSManagedObject]] = [:]
 
 var currentSelectedContact: NSIndexPath!
 

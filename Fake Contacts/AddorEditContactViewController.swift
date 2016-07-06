@@ -29,7 +29,12 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
 
         if calledFromEdit {
             //Obtaining info on which person's name you clicked
-            let person = contactPeople[currentSelectedContact.row]
+            let arrayOfKeys = alphabetizedContactPeople.keys
+            let sortedKeys = arrayOfKeys.sort()
+            
+            let key = sortedKeys[currentSelectedContact.section]
+            let peopleWithSameFirstLetter = alphabetizedContactPeople[key]
+            let person = peopleWithSameFirstLetter![currentSelectedContact.row]
             
             //Setting the details
             self.NameText.text = person.valueForKey("name") as? String
@@ -138,7 +143,14 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
         }
 
         if calledFromEdit {
-            let person = contactPeople[currentSelectedContact.row]
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = appDelegate.managedObjectContext
+            
+            let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
+            
+            let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
             if (contactImage.image != nil) {
@@ -146,7 +158,10 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
                 person.setValue(imageData, forKey: "picture")
             }
             
-            contactPeople[currentSelectedContact.row] = person
+            let arrayOfKeys = alphabetizedContactPeople.keys
+            let sortedKeys = arrayOfKeys.sort()
+            let key = sortedKeys[currentSelectedContact.section]
+            alphabetizedContactPeople[key]![currentSelectedContact.row] = person
             
             NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
             
@@ -166,8 +181,10 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
         
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
-            let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
-            person.setValue(imageData, forKey: "picture")
+            if (contactImage.image != nil) {
+                let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
+                person.setValue(imageData, forKey: "picture")
+            }
                 
             do {
                 try managedContext.save()
