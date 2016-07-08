@@ -2,6 +2,6 @@
 
 To Do :-
 
-Search Bar implementation
+Search Bar implementation for numbers
 
-Alphabetizing Contact List
+Debugging
