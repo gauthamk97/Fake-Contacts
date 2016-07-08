@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ContactsTableViewController: UITableViewController, UISearchControllerDelegate {
+class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
     
+    var searchActive : Bool = false
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var contactsTable: UITableView!
     
@@ -18,6 +19,9 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
         super.viewDidLoad()
         
         title = "Contacts"
+        searchBar.delegate = self
+        
+        IDNumber = contactPeople.count
         
         //To check if table must be updated after adding/editing a contact
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactsTableViewController.updateContacts), name: haveToUpdateTableView, object: nil)
@@ -51,13 +55,72 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
+        
+        for item in contactPeople {
+            let name = item.valueForKey("name") as? String
+            let number = item.valueForKey("number") as? String
+            
+            contactNames.append(name!)
+            contactNumbers.append(number!)
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - Search Bar Functions
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+        self.contactsTable.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
 
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Person")
+        
+        let filter = searchText
+        let predicate = NSPredicate(format: "name contains[c] %@", filter)
+        fetchRequest.predicate = predicate
+        
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            filteredPeople = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        if(filteredPeople.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        
+        self.contactsTable.reloadData()
+
+        
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -67,7 +130,13 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contactPeople.count
+        if searchActive {
+            return filteredPeople.count
+        }
+        else {
+            return contactPeople.count
+        }
+        
     }
 
     
@@ -75,16 +144,26 @@ class ContactsTableViewController: UITableViewController, UISearchControllerDele
         
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        let contactPerson = contactPeople[indexPath.row]
-        
-        cell.textLabel?.text = contactPerson.valueForKey("name") as? String
+        if searchActive {
+            let contactPerson = filteredPeople[indexPath.row]
+            cell.textLabel?.text = contactPerson.valueForKey("name") as? String
+        }
+        else {
+            let contactPerson = contactPeople[indexPath.row]
+            cell.textLabel?.text = contactPerson.valueForKey("name") as? String
+        }
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        currentSelectedContact = indexPath
+        if searchActive {
+            selectedIDNumber = filteredPeople[indexPath.row].valueForKey("id") as? Int
+        }
+        else {
+            selectedIDNumber = contactPeople[indexPath.row].valueForKey("id") as? Int
+        }
         
         //Moving to InformationsViewController
         performSegueWithIdentifier("InformationController", sender: self)

@@ -29,7 +29,7 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
 
         if calledFromEdit {
             //Obtaining info on which person's name you clicked
-            let person = contactPeople[currentSelectedContact.row]
+            let person = contactPeople[selectedIDNumber]
             
             //Setting the details
             self.NameText.text = person.valueForKey("name") as? String
@@ -138,7 +138,7 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
         }
 
         if calledFromEdit {
-            let person = contactPeople[currentSelectedContact.row]
+            let person = contactPeople[selectedIDNumber]
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
             if (contactImage.image != nil) {
@@ -146,7 +146,7 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
                 person.setValue(imageData, forKey: "picture")
             }
             
-            contactPeople[currentSelectedContact.row] = person
+            contactPeople[selectedIDNumber] = person
             
             NSNotificationCenter.defaultCenter().postNotificationName(haveToUpdateTableView, object: self)
             
@@ -166,9 +166,13 @@ class AddorEditContactViewController: UIViewController, UITextFieldDelegate, UII
         
             person.setValue(NameText.text!, forKey: "name")
             person.setValue(NumberText.text!, forKey: "number")
-            let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
-            person.setValue(imageData, forKey: "picture")
-                
+            if (contactImage.image != UIImage(named: "add_user")) {
+                let imageData: NSData! = UIImagePNGRepresentation(contactImage.image!)
+                person.setValue(imageData, forKey: "picture")
+            }
+            
+            person.setValue(IDNumber, forKey: "id")
+            IDNumber+=1
             do {
                 try managedContext.save()
                 contactPeople.append(person)

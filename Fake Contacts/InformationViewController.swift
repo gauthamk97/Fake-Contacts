@@ -19,7 +19,7 @@ class InformationViewController: UIViewController {
         super.viewDidLoad()
 
         //Obtaining info on which person's name you clicked
-        let person = contactPeople[currentSelectedContact.row]
+        let person = contactPeople[selectedIDNumber]
         
         //Setting the details
         self.nameLabel?.text = person.valueForKey("name") as? String
@@ -45,7 +45,7 @@ class InformationViewController: UIViewController {
     
     func updateContactDetails() {
         //Obtaining info on which person's name you clicked
-        let person = contactPeople[currentSelectedContact.row]
+        let person = contactPeople[selectedIDNumber]
         
         //Setting the details
         self.nameLabel?.text = person.valueForKey("name") as? String

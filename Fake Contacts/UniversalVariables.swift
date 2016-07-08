@@ -10,9 +10,16 @@ import Foundation
 import UIKit
 import CoreData
 
-var contactPeople: [NSManagedObject] = []
+var IDNumber: Int = 1
+var selectedIDNumber: Int!
 
-var currentSelectedContact: NSIndexPath!
+var contactPeople: [NSManagedObject] = []
+var contactNames: [String] = []
+var contactNumbers: [String] = []
+
+var filteredPeople: [NSManagedObject] = []
+
+//var currentSelectedContact: NSIndexPath!
 
 let haveToUpdateTableView = ".com.GK.updateTVRequired"
 
